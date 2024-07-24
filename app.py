@@ -1,6 +1,8 @@
 from cuentas import cuentas_list
 from colorama import init, Fore, Back, Style
 import random
+import sys
+import os
 
 init()
 
@@ -8,13 +10,18 @@ def play():
     cuenta_random = get_random_cuenta()
     user_input = guess_clasification(cuenta_random)
     if int(user_input) != cuenta_random[1]:
+        os.system('cls')
         print(Fore.RED + 'ERROR')
     else:
+        os.system('cls')
         print(Fore.GREEN + 'CORRECTO')
         user_input = guess_rubro(cuenta_random)
         if int(user_input) != cuenta_random[2]:
+            os.system('cls')
             print(Fore.RED +'ERROR')
-        else: print(Fore.GREEN + 'CORRECTO')
+        else: 
+            os.system('cls')
+            print(Fore.GREEN + 'CORRECTO')
             
 def get_random_cuenta():
     ran = random.randint(0,len(cuentas_list))
@@ -42,5 +49,10 @@ def guess_rubro(cuenta_random):
     return user_input
     
 while True:
-    play()
+    try:
+        play()
+    except KeyboardInterrupt:
+        os.system('cls')
+        print(Fore.YELLOW + '\nGracias por JUGAR!!')
+        sys.exit()
   
